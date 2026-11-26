@@ -1,0 +1,38 @@
+{
+  "tenants": [
+    {
+      "tenant": "service",
+      "normal_limit": 100,
+      "urgent_limit": 40
+    },
+    {
+      "tenant": "research",
+      "normal_limit": 60,
+      "urgent_limit": 0
+    }
+  ],
+  "cycles": [
+    {
+      "cycle": "march",
+      "start": 0,
+      "end": 100
+    },
+    {
+      "cycle": "april",
+      "start": 100,
+      "end": 200
+    }
+  ],
+  "outlets": [
+    {
+      "outlet": "legacy",
+      "quote": 65,
+      "supports_lookup": false
+    },
+    {
+      "outlet": "tracked",
+      "quote": 35,
+      "supports_lookup": true
+    }
+  ]
+}

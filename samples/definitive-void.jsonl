@@ -1,0 +1,8 @@
+{"at": 3, "kind": "intent", "tenant": "service", "number": "t1", "digest": "rec-20", "language": "zh", "urgent": false}
+{"at": 4, "kind": "send", "tenant": "service", "number": "t1", "outlet": "tracked", "attempt": "x1"}
+{"at": 5, "kind": "receipt", "attempt": "x1", "result": "absent_pending", "provider_operation": null}
+{"at": 8, "kind": "intent", "tenant": "service", "number": "t1", "digest": "rec-21", "language": "en", "urgent": false}
+{"at": 9, "kind": "receipt", "attempt": "x1", "result": "final_void", "provider_operation": null}
+{"at": 10, "kind": "send", "tenant": "service", "number": "t1", "outlet": "legacy", "attempt": "x2"}
+{"at": 14, "kind": "receipt", "attempt": "x2", "result": "completed", "provider_operation": "x31"}
+{"at": 15, "kind": "bill", "tenant": "research", "cycle": "march", "charge": "x1", "revision": 1, "provider_operation": "x91", "attempt": "x3", "amount": 15}

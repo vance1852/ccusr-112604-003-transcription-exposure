@@ -1,0 +1,13 @@
+{"at": 65, "kind": "intent", "tenant": "service", "number": "d-28", "digest": "rec-1", "language": "zh", "urgent": false}
+{"at": 66, "kind": "send", "tenant": "service", "number": "d-28", "outlet": "legacy", "attempt": "tx1"}
+{"at": 68, "kind": "receipt", "attempt": "tx1", "result": "timeout", "provider_operation": null}
+{"at": 69, "kind": "intent", "tenant": "service", "number": "d-28", "digest": "rec-1", "language": "zh", "urgent": false}
+{"at": 70, "kind": "pause", "tenant": "service", "outlet": "legacy"}
+{"at": 73, "kind": "intent", "tenant": "service", "number": "d-29", "digest": "rec-2", "language": "en", "urgent": true}
+{"at": 74, "kind": "send", "tenant": "service", "number": "d-29", "outlet": "tracked", "attempt": "tx2"}
+{"at": 76, "kind": "receipt", "attempt": "tx2", "result": "accepted", "provider_operation": "pv32"}
+{"at": 80, "kind": "cancel", "tenant": "service", "number": "d-29"}
+{"at": 103, "kind": "bill", "tenant": "service", "cycle": "march", "charge": "c27", "revision": 1, "provider_operation": "pv31", "attempt": "tx1", "amount": 65}
+{"at": 106, "kind": "receipt", "attempt": "tx1", "result": "completed", "provider_operation": "pv31"}
+{"at": 109, "kind": "bill", "tenant": "service", "cycle": "march", "charge": "c29", "revision": 1, "provider_operation": "pv32", "attempt": "tx2", "amount": 35}
+{"at": 112, "kind": "bill", "tenant": "service", "cycle": "march", "charge": "c29", "revision": 2, "provider_operation": "pv32", "attempt": "tx2", "amount": 14}
