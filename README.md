@@ -20,3 +20,21 @@ python3 -m unittest discover -s tests -v
 ```
 
 原始资料可按 `--kind` 筛选。程序按接收顺序显示记录。单元测试核对资料能够读取，以及事件夹具的基本结构。
+
+## 运行服务
+
+`relay` 包在清册之上提供连续运行的外发与账单核对服务，同样只用标准库。
+
+- `relay/core.py` 是领域核心。意图按 部门+编号 幂等登记；摘要、语言、是否加急任一变化都记为待客户决定的冲突。每次外发按出口报价占用当周期普通或应急额度，只有 final_void 或账单到账才解除占用；在此之前同一工作不得换出口重发。账单 revision 是同一扣款的新净额；迟到的上一周期材料只记回所属周期。出口暂停只阻断新外发，查证与收账照常。
+- `relay/store.py` 把每个被受理的决定追加落盘；`RelayService.restore` 重放日志恢复，重启不丢已发未决请求和已向客户、财务给出的决定。
+- `relay/vendor.py` 是确定性合成供应商：默认受理、完成、周期关账后出账，可按 attempt 编排超时与 final_void，`advance` 推进演练秒。
+- `relay/server.py` 用 HTTP 暴露服务；`relay/demo.py` 重放演练事件文件。
+
+```sh
+python3 -m relay.demo samples/shift-log.jsonl            # 重放并打印客户结果、额度、对账
+python3 -m relay.demo samples/definitive-void.jsonl --restart-at 6
+python3 -m relay.server --samples samples --state var/state --port 8080
+python3 -m unittest discover -s tests -v
+```
+
+HTTP 变更接口（POST JSON，可带 `at` 演练秒，缺省取服务时钟）：`/v1/intents`、`/v1/dispatches`、`/v1/cancels`、`/v1/conflict-decisions`、`/v1/followups`、`/v1/pauses`、`/v1/resumes`、`/v1/tracks`、`/v1/vendor/receipts`、`/v1/vendor/bills`、`/v1/vendor/advance`。查询接口（GET）：`/v1/tasks/{tenant}/{number}` 客户结果、`/v1/quota/{tenant}/{cycle}` 还能承诺的额度、`/v1/reconciliation/{cycle}` 运营对账依据。业务拒绝返回 409 与稳定 reason。
